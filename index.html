@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- ─────────────────────────────────────────────────
+      1) Inline script MUST go BEFORE any CSS so the
+         page renders light-mode first (avoids FOUC).
+    ────────────────────────────────────────────────── -->
+    <script>
+      (function() {
+        const html = document.documentElement;
+        const stored = localStorage.getItem('theme');
+        // If stored is 'dark', add class; otherwise ensure it's removed
+        if (stored === 'dark') {
+          html.classList.add('dark');
+        } else {
+          html.classList.remove('dark');
+        }
+        // Expose a toggleTheme() for your button
+        window.toggleTheme = function() {
+          if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+          } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+          }
+        };
+      })();
+    </script>
+
+    <!-- ─────────────────────────────────────────────────
+      2) Your existing meta, fonts, and Tailwind CSS link
+    ────────────────────────────────────────────────── -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Das Sanjeevan - Backend Developer | Java Spring Boot Expert</title>
+    <!-- …other metas… -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <!-- your Tailwind-generated CSS -->
+    <script type="module" crossorigin src="/assets/index-thfx_4PF.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BhIOQ9c2.css">
+  </head>
+
+  <body>
+    <header
+      class="fixed top-0 left-0 right-0 h-[var(--header-height)] bg-background z-50 flex items-center justify-between px-4"
+    >
+      <!-- nav items… -->
+      <button
+        class="p-2 rounded border text-foreground"
+        onclick="toggleTheme()"
+      >
+        🌓
+      </button>
+    </header>
+
+    <div id="root"></div>
+  </body>
+</html>
